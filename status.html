@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+  <link href="status.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="status.css">
+  <link rel="stylesheet" type="text/css" href="fa.all.min.css">
+  
+  <title>EESSI status</title>
+</head>
+
+<script>
+  function open_close(myid) {
+  var x = document.getElementById(myid);
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+
+<body>
+
+<div class="header-row">
+    <div class="header-text">
+        <div class="content">
+            <h1 class="content-left">EESSI :: Status</h1>
+            <img class="content-right inline" src="https://www.eessi-hpc.org/wp-content/uploads/2020/06/eessi-512px.png" width="75px" />
+        </div>
+    </div>
+</div>
+
+<div class="content-row">
+
+    <div class="overall">
+        <span class="status-degraded">Degraded</span>
+    </div>
+
+    <div class="legend">
+        <span class="status-ok fas fa-check"> Normal service</span>
+        <span class="status-degraded fas fa-minus-square"> Degraded</span>
+        <span class="status-warning fas fa-exclamation-triangle"> Warning</span> 
+        <span class="status-failed fas fa-times-circle"> Failed</span>
+        <span class="status-maintenance fas fa-hammer"> Maintenance</span>
+    </div>
+
+
+    <div class="content">
+        <div class="content-left infobox">
+            Servers: <span class="status-degraded">Degraded</span>
+        </div>
+        <div class="content-right infobox">
+            Repositories: <span class="status-ok fas fa-check"></span>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="content-left infobox">
+            <div class="node" >bgo-no: <span class="status-ok">OK</span></div>
+            <div class="open-close">
+                <div>Updates: <span class="status-ok">OK</span></div>
+                <div>GEO API: <span class="status-ok">OK</span></div>
+            </div>
+
+            <div class="node" onclick='open_close("rug-nl")'>rug-nl: <span class="status-warning">Warning</span></div>
+            <div id="rug-nl" style="display: none">
+                <ul>
+                <li>Updates: <span class="status-ok">OK</span></li>
+                <li>GEO API: <span class="status-warning">Warning</span></li>
+                </ul>
+            </div>
+
+            <div class="node" onclick='open_close("aws-eu-west1")'>aws-eu-west1: <span class="status-ok">Warning</span></div>
+            <div id="aws-eu-west1" style="display: none">
+                <div>Updates: <span class="status-degraded">Degraded</span></div>
+                <div>GEO API: <span class="status-warning">Warning</span></div>
+            </div>
+
+            <div class="node" >azure-us-east1: <span class="status-ok">OK</span></div>
+            <div class="open-close">
+                <div>Updates: <span class="status-ok">OK</span></div>
+                <div>GEO API: <span class="status-ok">OK</span></div>
+            </div>
+        </div>
+        <div class="content-right infobox">
+            <div class="node" >pilot.eessi-hpc.org: <span class="status-degraded">Degraded</span></div>
+            <div class="open-close">
+                <ul>
+                <li>Version syncronization: <span class="status-ok">OK</span></li>
+                <li>Updates: <span class="status-degraded">Degraded</span></li>
+                </ul>
+            </div>
+
+            <div class="node">ci.eessi-hpc.org: <span class="status-critical">Critical</span></div>
+            <div class="open-close">
+                <div>Version syncronization: <span class="status-warning">Warning</span></div>
+                <div>Updates: <span class="status-critical">Critical</span></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

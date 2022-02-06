@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+  <link href="status.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="status.css">
+  <link rel="stylesheet" type="text/css" href="fa.all.min.css">
+  
+  <title>EESSI status</title>
+</head>
+
+<script>
+  function open_close(myid) {
+  var x = document.getElementById(myid);
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+
+<body>
+
+<div class="header-row">
+    <div class="header-text">
+        <div class="content">
+            <h1 class="content-left">EESSI :: Status</h1>
+            <img class="content-right inline" src="https://www.eessi-hpc.org/wp-content/uploads/2020/06/eessi-512px.png" width="75px" />
+        </div>
+    </div>
+</div>
+
+<div class="content-row">
+
+    <div class="overall">
+        <span class="{{ status-overall }}">{{ status-overall-text }}</span>
+    </div>
+
+    <div class="legend">
+        <span class="status-ok fas fa-check"> Normal service</span>
+        <span class="status-degraded fas fa-minus-square"> Degraded</span>
+        <span class="status-warning fas fa-exclamation-triangle"> Warning</span> 
+        <span class="status-failed fas fa-times-circle"> Failed</span>
+        <span class="status-maintenance fas fa-hammer"> Maintenance</span>
+    </div>
+
+
+    <div class="content">
+        <div class="content-left infobox">
+            Servers: <span class="{{ status-servers }}"></span>
+        </div>
+        <div class="content-right infobox">
+            Repositories: <span class="{{ status-repositories }}"></span>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="content-left infobox">
+            {% for server in servers %}
+            <div class="node" onclick='open_close("{{ server.shortname }}")'>{{ server.shortname }}: <span class="{{ server.status }}"></span></div>
+            <div id="{{ server.shortname }}" style="display: none">
+              <ul>
+                <li>Updates: <span class="{{ server.status_updates }}"></span></li>
+                <li>GEO API: <span class="{{ server.status_geoapi }}"></li>
+                <li>Garbage collection: <span class="{{ server.status_gc }}"></li>
+              </ul>
+            </div>
+
+            {% endfor %}
+        </div>
+        <div class="content-right infobox">
+            {% for repo in repositories %}
+            <div class="node" onclick='open_close("{{ repo.name }}")'>: {{ repo.name }}<span class="{{ repo.status }}"></span></div>
+            <div id="{{ repo.name }}" style="display: none">
+              <ul>
+                <li>Version syncronization: <span class="{{ repo.status_sync }}"></span></li>
+                <li>Updates: <span class="{{ repo.status_updates }}"></span></li>
+              </ul>
+            </div>
+            
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
