@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Sora:wght@100;200;300;400;500;600;700&display=swap");
 :root {
     --color-step-900: #192432;
     --color-step-800: #1e2b3c;
@@ -46,10 +46,11 @@
 }
 
 body, button, label {
-    font-family: "Inter", sans-serif !important;
+    font-family: "Sora", sans-serif !important;
     background-color:var(--color-background)
 }
 
+@media only screen and (min-width: 1101px) {
 .header-row {
     margin-top: 1.3em;
     margin-bottom: 2em;
@@ -60,17 +61,89 @@ body, button, label {
     height: 60px;
     background-color:var(--color-top-bar);
 }
+}
 
-.overall {
-    max-width: 1100px;
-    margin: auto;
-    color: var(--color-text);
-    background-color: var(--color-content-bar);
-    padding: 1em;
-    margin-bottom: 2em;
-    -webkit-box-shadow: 2px 2px 7px -4px #000000; 
-    box-shadow: 2px 2px 7px -4px #000000;    
+@media only screen and (max-width: 1100px) {
+    .header-row {
+        margin-top: 1.3em;
+        margin-bottom: 2em;
+        padding-left: 0.2em;
+        padding-right: 0.2em;
+        padding-top: 10px;
+        padding-bottom: 25px;
+        height: 60px;
+        background-color:var(--color-top-bar);
+    }
+}
 
+@media only screen and (min-width: 1101px) {
+    .overall {
+        max-width: 1100px;
+        margin: auto;
+        color: var(--color-text);
+        background-color: var(--color-content-bar);
+        padding: 1em;
+        margin-bottom: 2em;
+        -webkit-box-shadow: 2px 2px 7px -4px #000000; 
+        box-shadow: 2px 2px 7px -4px #000000;    
+        text-align: center;
+    }    
+} 
+
+@media only screen and (max-width: 1100px) {
+    .overall {
+        margin: auto;
+        color: var(--color-text);
+        background-color: var(--color-content-bar);
+        padding: 1em;
+        margin-bottom: 2em;
+        -webkit-box-shadow: 2px 2px 7px -4px #000000; 
+        box-shadow: 2px 2px 7px -4px #000000;    
+        text-align: center;
+    }
+} 
+
+div.header-row h1 {
+    font-weight: 400;
+}
+
+
+.overall-description {
+    font-weight: 300;
+}
+
+.overall-info {
+    font-size: 3em;
+    padding-top: 0.3em;
+}
+
+div.overall h1 {
+    font-weight: 400;
+    margin-top: 0.5em;
+}
+
+div.infoblock > h2 {
+    display: inline;
+}
+
+h2 {
+    font-weight: 200;
+    padding-top: 0.5em;
+}
+
+div.vcenter {
+    border: 1px solid black;
+}
+
+.expanded {
+    display: none;
+    padding: 0;
+    margin: 0;
+}
+
+ol.details {
+    padding-top: 2em;
+    padding-left: 2em;
 }
 
 .header-text, .content-row {
@@ -81,11 +154,27 @@ body, button, label {
 
 .infobox {
     background-color: var(--color-content-bar);
-    width: 45%;
     padding: 1em;
     -webkit-box-shadow: 2px 2px 7px -4px #000000; 
     box-shadow: 2px 2px 7px -4px #000000;
+    padding-bottom: 2em;
     margin-bottom: 2em;
+}    
+
+.infoblock-statusicon {
+    font-size: 1.3em;
+    padding: 0;
+    margin-bottom: 0;
+    padding-top: 0.9em;
+    padding-right: 1em;
+}
+
+.infobox-icon {
+    padding-top: 0.4em;
+    padding-right: 20px;
+    padding-left: 10px;
+    font-size: 2em;
+    font-weight: 200;
 }
 
 .node {
@@ -100,10 +189,10 @@ body, button, label {
     -webkit-font-smoothing: antialiased;
 }
 
-.node::after {
+/* .node::after {
     color: var(--color-text-desc);
     font-family: "Font Awesome 5 Free"; font-weight: 300; content: " \f103";
-}
+} */
 
 
 .legend {
@@ -118,6 +207,7 @@ div.legend span {
     text-align: center;
 }
 
+@media only screen and (min-width: 700px) {
 .content-left {
     float: left;
 }
@@ -126,8 +216,52 @@ div.legend span {
     float: right;
 }
 
+div.content-row > div.content-right, div.content-row > div.content-left {
+    width: 47%;
+}
+}
+
+@media only screen and (max-width: 700px) {
+    div.content-row > div.content-right, div.content-row > div.content-left {
+        width: 98%;
+    }
+
+    div.infoblock div.content-right {
+        float: right;
+    }
+
+    div.content-right {
+        float: right;
+    }
+
+    img.content-right {
+        float: right;
+    }
+
+    h1.content-left {
+        float: left;
+    }
+
+
+}
+    
+
 .inline {
     display: inline;
+}
+
+table.details {
+    width: 100%;
+}
+
+td.updates, th.updates, td.geoapi, th.geoapi {
+    text-align: center;
+}
+
+th {
+    padding-top: 10px;
+    margin: 0;
+    text-align: left;
 }
 
 .color-green, .status-none, .status-ok {

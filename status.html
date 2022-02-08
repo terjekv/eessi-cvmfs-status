@@ -35,7 +35,9 @@
 <div class="content-row">
 
     <div class="overall">
-        <span class="status-degraded">Degraded</span>
+        <div class="status-degraded fas fa-minus-square overall-info"></div> 
+        <h1>Degraded</h1>
+        <p class="overall-description">EESSI services are operational and may be used as expected, but performance may be affected.</p>
     </div>
 
     <div class="legend">
@@ -46,58 +48,78 @@
         <span class="status-maintenance fas fa-hammer"> Maintenance</span>
     </div>
 
-
-    <div class="content">
-        <div class="content-left infobox">
-            Servers: <span class="status-degraded">Degraded</span>
+    <div class="content-left">
+        <div class="infobox">
+            <div class="infoblock stratum0" onclick='open_close("stratum0")'>
+                <span class="fas fa-database infobox-icon"></span>
+                <h2>Stratum0</h2>
+                <div class="content-right"><span class="infoblock-statusicon status-ok fas fa-check"></span></div>
+            </div>
+            <div id="stratum0" class="expanded">
+                <ol class="details">
+                    <li>Version: 355</li>
+                <ol>
+            </div>
         </div>
-        <div class="content-right infobox">
-            Repositories: <span class="status-ok fas fa-check"></span>
+        <div class="infobox">
+            <div class="stratum1 infoblock" onclick='open_close("stratum1")'>
+                <span class="fas fa-project-diagram infobox-icon"></span>
+                <h2>Stratum1 network</h2>
+                <div class="content-right"><span class="infoblock-statusicon status-degraded fas fa-minus-square"></span></div>
+            </div>
+            <div id="stratum1" class="expanded">
+            <table class="details">
+                <tr>
+                    <th></th>
+                    <th class="updates">Updates</th>
+                    <th class="geoapi">GeoAPI</th>
+                </tr>
+
+                <tr>
+                    <td>rug-nl</td>
+                    <td class="updates"><span class="status-ok fas fa-check"></span></td>
+                    <td class="geoapi"><span class="status-warning fas fa-exclamation-triangle"></span></td>
+                </tr>
+
+                <tr>
+                    <td>bgo-no</td>
+                    <td class="updates"><span class="status-ok fas fa-check"></span></td>
+                    <td class="geoapi"><span class="status-failed fas fa-times-circle"></span></td>
+                </tr>
+            </table>
+            </div>
+
         </div>
     </div>
 
-    <div class="content">
-        <div class="content-left infobox">
-            <div class="node" >bgo-no: <span class="status-ok">OK</span></div>
-            <div class="open-close">
-                <div>Updates: <span class="status-ok">OK</span></div>
-                <div>GEO API: <span class="status-ok">OK</span></div>
+    <div class="content-right">
+        <div class="infobox">
+            <div class="repositories infoblock" onclick='open_close("repositories")'>
+                <span class="fas fa-folder-open infobox-icon"></span>
+                <h2>Repositories</h2>
+                <div class="content-right"><span class="infoblock-statusicon status-warning fas fa-exclamation-triangle"></span></div>
             </div>
-
-            <div class="node" onclick='open_close("rug-nl")'>rug-nl: <span class="status-warning">Warning</span></div>
-            <div id="rug-nl" style="display: none">
-                <ul>
-                <li>Updates: <span class="status-ok">OK</span></li>
-                <li>GEO API: <span class="status-warning">Warning</span></li>
-                </ul>
-            </div>
-
-            <div class="node" onclick='open_close("aws-eu-west1")'>aws-eu-west1: <span class="status-ok">Warning</span></div>
-            <div id="aws-eu-west1" style="display: none">
-                <div>Updates: <span class="status-degraded">Degraded</span></div>
-                <div>GEO API: <span class="status-warning">Warning</span></div>
-            </div>
-
-            <div class="node" >azure-us-east1: <span class="status-ok">OK</span></div>
-            <div class="open-close">
-                <div>Updates: <span class="status-ok">OK</span></div>
-                <div>GEO API: <span class="status-ok">OK</span></div>
-            </div>
-        </div>
-        <div class="content-right infobox">
-            <div class="node" >pilot.eessi-hpc.org: <span class="status-degraded">Degraded</span></div>
-            <div class="open-close">
-                <ul>
-                <li>Version syncronization: <span class="status-ok">OK</span></li>
-                <li>Updates: <span class="status-degraded">Degraded</span></li>
-                </ul>
-            </div>
-
-            <div class="node">ci.eessi-hpc.org: <span class="status-critical">Critical</span></div>
-            <div class="open-close">
-                <div>Version syncronization: <span class="status-warning">Warning</span></div>
-                <div>Updates: <span class="status-critical">Critical</span></div>
-            </div>
+            <div id="repositories" class="expanded">
+                <table class="details">
+                        <tr>
+                            <th></th>
+                            <th class="updates">Version</th>
+                            <th class="geoapi">Updates</th>
+                        </tr>
+        
+                        <tr>
+                            <td>pilot</td>
+                            <td class="updates"><span class="status-ok fas fa-check"></span></td>
+                            <td class="geoapi"><span class="status-warning fas fa-exclamation-triangle"></span></td>
+                        </tr>
+        
+                        <tr>
+                            <td>ci</td>
+                            <td class="updates"><span class="status-ok fas fa-check"></span></td>
+                            <td class="geoapi"><span class="status-failed fas fa-times-circle"></span></td>
+                        </tr>
+                    </table>
+                    </div>
         </div>
     </div>
 </div>
