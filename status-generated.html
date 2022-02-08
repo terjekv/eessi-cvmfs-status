@@ -35,9 +35,9 @@
 <div class="content-row">
 
     <div class="overall">
-        <div class="status-degraded fas fa-minus-square overall-info"></div> 
-        <h1>Degraded</h1>
-        <p class="overall-description">EESSI services are operational and may be used as expected, but performance may be affected.</p>
+        <div class="status-ok fas fa-check overall-info"></div> 
+        <h1>Normal service</h1>
+        <p class="overall-description">EESSI services operating without issues.</p>
     </div>
 
     <div class="legend">
@@ -53,11 +53,15 @@
             <div class="infoblock stratum0" onclick='open_close("stratum0")'>
                 <span class="fas fa-database infobox-icon"></span>
                 <h2>Stratum0</h2>
-                <div class="content-right"><span class="infoblock-statusicon status-ok fas fa-check"></span></div>
+                <div class="content-right"><span class="status-ok fas fa-check infoblock-statusicon"></span></div>
             </div>
             <div id="stratum0" class="expanded" onclick='open_close("stratum0")'>
                 <ul class="details">
-                    <li>Version: 355</li>
+                    
+                    <li>cvmfs-config.eessi-hpc.org : 31</li>
+                    
+                    <li>pilot.eessi-hpc.org : 356</li>
+                    
                 <ul>
             </div>
         </div>
@@ -65,7 +69,7 @@
             <div class="stratum1 infoblock" onclick='open_close("stratum1")'>
                 <span class="fas fa-project-diagram infobox-icon"></span>
                 <h2>Stratum1 network</h2>
-                <div class="content-right"><span class="infoblock-statusicon status-degraded fas fa-minus-square"></span></div>
+                <div class="content-right"><span class="status-ok fas fa-check infoblock-statusicon"></span></div>
             </div>
             <div id="stratum1" class="expanded" onclick='open_close("stratum1")'>
             <table class="details">
@@ -75,17 +79,31 @@
                     <th class="geoapi">GeoAPI</th>
                 </tr>
 
+                
                 <tr>
-                    <td class="main">rug-nl</td>
+                    <td class="main">aws-eu-west1.stratum1.cvmfs.eessi-infra.org</td>
                     <td class="updates"><span class="status-ok fas fa-check"></span></td>
-                    <td class="geoapi"><span class="status-warning fas fa-exclamation-triangle"></span></td>
+                    <td class="geoapi"><span class="status-degraded fas fa-minus-square"></span></td>
                 </tr>
-
+                
                 <tr>
-                    <td class="main">bgo-no</td>
+                    <td class="main">azure-us-east1.stratum1.cvmfs.eessi-infra.org</td>
                     <td class="updates"><span class="status-ok fas fa-check"></span></td>
-                    <td class="geoapi"><span class="status-failed fas fa-times-circle"></span></td>
+                    <td class="geoapi"><span class="status-degraded fas fa-minus-square"></span></td>
                 </tr>
+                
+                <tr>
+                    <td class="main">bgo-no.stratum1.cvmfs.eessi-infra.org</td>
+                    <td class="updates"><span class="status-ok fas fa-check"></span></td>
+                    <td class="geoapi"><span class="status-degraded fas fa-minus-square"></span></td>
+                </tr>
+                
+                <tr>
+                    <td class="main">rug-nl.stratum1.cvmfs.eessi-infra.org</td>
+                    <td class="updates"><span class="status-ok fas fa-check"></span></td>
+                    <td class="geoapi"><span class="status-degraded fas fa-minus-square"></span></td>
+                </tr>
+                
             </table>
             </div>
 
@@ -97,33 +115,30 @@
             <div class="repositories infoblock" onclick='open_close("repositories")'>
                 <span class="fas fa-folder-open infobox-icon"></span>
                 <h2>Repositories</h2>
-                <div class="content-right"><span class="infoblock-statusicon status-warning fas fa-exclamation-triangle"></span></div>
+                <div class="content-right"><span class="status-ok fas fa-check infoblock-statusicon"></span></div>
             </div>
             <div id="repositories" class="expanded" onclick='open_close("repositories")'>
                 <table class="details">
                         <tr>
                             <th class="main"></th>
                             <th class="updates">Version</th>
-                            <th class="geoapi">Updates</th>
+                            <th class="geoapi">Snapshot</th>
                         </tr>
         
+                        
                         <tr>
                             <td class="main">pilot</td>
                             <td class="updates"><span class="status-ok fas fa-check"></span></td>
-                            <td class="geoapi"><span class="status-warning fas fa-exclamation-triangle"></span></td>
+                            <td class="geoapi"><span class="status-ok fas fa-check"></span></td>
                         </tr>
-        
-                        <tr>
-                            <td class="main">ci</td>
-                            <td class="updates"><span class="status-ok fas fa-check"></span></td>
-                            <td class="geoapi"><span class="status-failed fas fa-times-circle"></span></td>
-                        </tr>
+                        
                     </table>
                     </div>
         </div>
     </div>
 </div>
 
+<div class="footer">Last updated 2022-02-09T00:33:17 | contact@eessi-hpc.org</div>
 
 </body>
 </html>

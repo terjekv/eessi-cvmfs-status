@@ -141,9 +141,9 @@ div.vcenter {
     margin: 0;
 }
 
-ol.details {
-    padding-top: 2em;
-    padding-left: 2em;
+ul.details {
+    padding-top: 1em;
+    padding-left: 5em;
 }
 
 .header-text, .content-row {
@@ -160,6 +160,10 @@ ol.details {
     padding-bottom: 2em;
     margin-bottom: 2em;
 }    
+
+.infobox :hover {
+    cursor: pointer;
+}
 
 .infoblock-statusicon {
     font-size: 1.3em;
@@ -230,10 +234,6 @@ div.content-row > div.content-right, div.content-row > div.content-left {
         float: right;
     }
 
-    div.content-right {
-        float: right;
-    }
-
     img.content-right {
         float: right;
     }
@@ -251,17 +251,39 @@ div.content-row > div.content-right, div.content-row > div.content-left {
 }
 
 table.details {
+    padding-top: 1em;
+    padding-left: 2em;
     width: 100%;
 }
 
+tr {
+    border-bottom: 1px dotted var(--color-step-200);
+}
+
+tr:nth-child(even) {background: var(--color-step-300)}
+tr:nth-child(odd) {background: var(--color-step-100)}
+
 td.updates, th.updates, td.geoapi, th.geoapi {
     text-align: center;
+}
+
+td.main {
+    text-align: left;
 }
 
 th {
     padding-top: 10px;
     margin: 0;
     text-align: left;
+}
+
+.footer {
+    clear: both;
+    padding-top: 2em;
+    text-align: center;
+    color: var(--color-step-700);
+    font-size: 0.7em;
+    font-weight: 300;
 }
 
 .color-green, .status-none, .status-ok {

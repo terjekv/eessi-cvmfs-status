@@ -1,0 +1,1 @@
+git+https://github.com/terjekv/cvmfs-server-scraper@main#egg=cvmfs-server-scraper

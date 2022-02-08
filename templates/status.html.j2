@@ -35,17 +35,17 @@
 <div class="content-row">
 
     <div class="overall">
-        <div class="status-degraded fas fa-minus-square overall-info"></div> 
-        <h1>Degraded</h1>
-        <p class="overall-description">EESSI services are operational and may be used as expected, but performance may be affected.</p>
+        <div class="{{ eessi_status_class }} overall-info"></div> 
+        <h1>{{ eessi_status_text }}</h1>
+        <p class="overall-description">{{ eessi_status_description }}</p>
     </div>
 
     <div class="legend">
-        <span class="status-ok fas fa-check"> Normal service</span>
-        <span class="status-degraded fas fa-minus-square"> Degraded</span>
-        <span class="status-warning fas fa-exclamation-triangle"> Warning</span> 
-        <span class="status-failed fas fa-times-circle"> Failed</span>
-        <span class="status-maintenance fas fa-hammer"> Maintenance</span>
+        <span class="{{ legend.OK.class }}"> {{ legend.OK.text }}</span>
+        <span class="{{ legend.DEGRADED.class }}"> {{ legend.DEGRADED.text }}</span>
+        <span class="{{ legend.WARNING.class }}"> {{ legend.WARNING.text }}</span> 
+        <span class="{{ legend.FAILED.class }}"> {{ legend.FAILED.text }}</span>
+        <span class="{{ legend.MAINTENANCE.class }}"> {{ legend.MAINTENANCE.text }}</span>
     </div>
 
     <div class="content-left">
@@ -53,11 +53,13 @@
             <div class="infoblock stratum0" onclick='open_close("stratum0")'>
                 <span class="fas fa-database infobox-icon"></span>
                 <h2>Stratum0</h2>
-                <div class="content-right"><span class="infoblock-statusicon status-ok fas fa-check"></span></div>
+                <div class="content-right"><span class="{{ stratum0_status_class }} infoblock-statusicon"></span></div>
             </div>
             <div id="stratum0" class="expanded" onclick='open_close("stratum0")'>
                 <ul class="details">
-                    <li>Version: 355</li>
+                    {% for element in stratum0_details %}
+                    <li>{{ element }}</li>
+                    {% endfor %}
                 <ul>
             </div>
         </div>
@@ -65,7 +67,7 @@
             <div class="stratum1 infoblock" onclick='open_close("stratum1")'>
                 <span class="fas fa-project-diagram infobox-icon"></span>
                 <h2>Stratum1 network</h2>
-                <div class="content-right"><span class="infoblock-statusicon status-degraded fas fa-minus-square"></span></div>
+                <div class="content-right"><span class="{{ stratum1_status_class }} infoblock-statusicon"></span></div>
             </div>
             <div id="stratum1" class="expanded" onclick='open_close("stratum1")'>
             <table class="details">
@@ -75,17 +77,13 @@
                     <th class="geoapi">GeoAPI</th>
                 </tr>
 
+                {% for server in stratum1s|sort(attribute="name") %}
                 <tr>
-                    <td class="main">rug-nl</td>
-                    <td class="updates"><span class="status-ok fas fa-check"></span></td>
-                    <td class="geoapi"><span class="status-warning fas fa-exclamation-triangle"></span></td>
+                    <td class="main">{{ server.name }}</td>
+                    <td class="updates"><span class="{{ server.update_class }}"></span></td>
+                    <td class="geoapi"><span class="{{ server.geoapi_class }}"></span></td>
                 </tr>
-
-                <tr>
-                    <td class="main">bgo-no</td>
-                    <td class="updates"><span class="status-ok fas fa-check"></span></td>
-                    <td class="geoapi"><span class="status-failed fas fa-times-circle"></span></td>
-                </tr>
+                {% endfor %}
             </table>
             </div>
 
@@ -97,33 +95,30 @@
             <div class="repositories infoblock" onclick='open_close("repositories")'>
                 <span class="fas fa-folder-open infobox-icon"></span>
                 <h2>Repositories</h2>
-                <div class="content-right"><span class="infoblock-statusicon status-warning fas fa-exclamation-triangle"></span></div>
+                <div class="content-right"><span class="{{ repositories_status_class }} infoblock-statusicon"></span></div>
             </div>
             <div id="repositories" class="expanded" onclick='open_close("repositories")'>
                 <table class="details">
                         <tr>
                             <th class="main"></th>
                             <th class="updates">Version</th>
-                            <th class="geoapi">Updates</th>
+                            <th class="geoapi">Snapshot</th>
                         </tr>
         
+                        {% for repo in repositories|sort(attribute="name") %}
                         <tr>
-                            <td class="main">pilot</td>
-                            <td class="updates"><span class="status-ok fas fa-check"></span></td>
-                            <td class="geoapi"><span class="status-warning fas fa-exclamation-triangle"></span></td>
+                            <td class="main">{{ repo.name }}</td>
+                            <td class="updates"><span class="{{ repo.revision_class }}"></span></td>
+                            <td class="geoapi"><span class="{{ repo.snapshot_class }}"></span></td>
                         </tr>
-        
-                        <tr>
-                            <td class="main">ci</td>
-                            <td class="updates"><span class="status-ok fas fa-check"></span></td>
-                            <td class="geoapi"><span class="status-failed fas fa-times-circle"></span></td>
-                        </tr>
+                        {% endfor %}
                     </table>
                     </div>
         </div>
     </div>
 </div>
 
+<div class="footer">Last updated {{ last_update }} | contact@eessi-hpc.org</div>
 
 </body>
 </html>
