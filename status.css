@@ -221,7 +221,7 @@ div.legend span {
 }
 
 div.content-row > div.content-right, div.content-row > div.content-left {
-    width: 47%;
+    width: 47%;    
 }
 }
 
@@ -240,6 +240,10 @@ div.content-row > div.content-right, div.content-row > div.content-left {
 
     h1.content-left {
         float: left;
+    }
+
+    div.legend {
+        display: none;
     }
 
 
