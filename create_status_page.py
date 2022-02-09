@@ -148,9 +148,11 @@ for server in servers:
                 if rs == get_class("OK"):
                     repo_snap_status[repo.name] = get_class("DEGRADED")
 
-        stratum1_servers.append( 
+        shortname = server.name.split('.')
+
+        stratum1_servers.append(
             {
-                "name": server.name,
+                "name": shortname[0],
                 "update_class": updates,
                 "geoapi_class": get_class("DEGRADED") # Not implemented in the scraper!
             },
@@ -167,7 +169,8 @@ for repo in known_repos:
     )
 
 for repo in stratum0_repo_versions:
-    stratum0_details.append(repo + " : " + str(stratum0_repo_versions[repo]))
+    shortname = repo.split('.')
+    stratum0_details.append(shortname[0] + " : " + str(stratum0_repo_versions[repo]))
 
 
 data = {
