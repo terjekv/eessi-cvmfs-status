@@ -50,6 +50,21 @@ def get_text(status):
 def get_desc(status):
     return LEGEND[status]["description"]
 
+def ok_class():
+    return get_class("OK")
+
+def degraded_class():
+    return get_class("DEGRADED")
+
+def warning_class():
+    return get_class("WARNING")
+
+def failed_class():
+    return get_class("FAILED")
+
+def maintenance_class():
+    return get_class("MAINTENANCE")
+
 
 servers = scrape(
     servers = [
@@ -82,10 +97,10 @@ eessi_status_text = get_text(eessi_status)
 eessi_status_description = get_desc(eessi_status)
 
 stratum0_repo_versions = {}
-stratum0_status_class = get_class("OK")
+stratum0_status_class = ok_class()
 stratum0_details = []
 
-stratum1_status_class = get_class("OK")
+stratum1_status_class = ok_class()
 stratum1_servers = [
 #    {
 #        "name": "bgo-no",
@@ -100,7 +115,7 @@ stratum1_servers = [
 #    },
 ]
 
-repositories_status_class = get_class("OK")
+repositories_status_class = ok_class()
 repositories = [
 #    {
 #        "name": "pilot",
@@ -124,37 +139,48 @@ for server in servers:
 
 for server in servers:
     if server.server_type == 1:
-        updates = get_class("OK")
+        updates = ok_class()
         for repo in server.repositories:
             # Pure initialization, we'll find problems later.
             if not repo.name in known_repos:
-                repo_rev_status[repo.name] = get_class("OK")
-                repo_snap_status[repo.name] = get_class("OK")
+                repo_rev_status[repo.name] = ok_class()
+                repo_snap_status[repo.name] = ok_class()
                 known_repos[repo.name] = 1
 
             if repo.revision != stratum0_repo_versions[repo.name]:
-                updates = get_class("WARNING")
+                updates = warning_class()
                 eessi_not_ok_events.append(2)
                 stratum1_not_ok_events.append(2)
                 repositories_not_ok_events.append(2)
 
                 rs = repo_rev_status[repo.name]
                 # Escalate, this is ugly, should keep track of all the issues and pick the worst.
-                if rs == get_class("OK") or rs == get_class("DEGRADED"):
-                    repo_rev_status[repo.name] = get_class("WARNING")
+                if rs == ok_class() or rs == degraded_class():
+                    repo_rev_status[repo.name] = warning_class()
 
             if NOW - repo.last_snapshot > ACCEPTED_TIME_SINCE_SNAPSHOT_IN_SECONDS:
                 rs = repo_snap_status[repo.last_snapshot]
-                if rs == get_class("OK"):
-                    repo_snap_status[repo.name] = get_class("DEGRADED")
+                if rs == ok_class():
+                    repo_snap_status[repo.name] = degraded_class()
 
         shortname = server.name.split('.')
+
+        geoapi_class = ok_class()
+        # 0 ok, 1 wrong answer, 2 failing, 9 unable to test
+        if server.geoapi_status == 0:
+            geoapi_class = ok_class()
+        elif server.geoapi_status == 1:
+            geoapi_class = degraded_class()
+        elif server.geoapi_status == 2:
+            geoapi_class = failed_class()
+        else:
+            server.geoapi_status = warning_class()
 
         stratum1_servers.append(
             {
                 "name": shortname[0],
                 "update_class": updates,
-                "geoapi_class": get_class("DEGRADED") # Not implemented in the scraper!
+                "geoapi_class": geoapi_class,
             },
         )
 
